@@ -1,37 +1,44 @@
-import { BsSearch } from "react-icons/bs";
-import css from "./SearchBar.module.css";
-import toast from "react-hot-toast";
-import { FormEvent } from "react";
+import s from "./SearchBar.module.css"
+import toast, { Toaster } from 'react-hot-toast';
+import { IoSearchSharp } from "react-icons/io5";
 
-export default function SearchBar({ onSubmit }) {
-  const handleInputSubmit = (event: FormEvent) => {
-    event.preventDefault();
 
-    const query: string = event.target.elements.searchword.value.trim();
-
-    if (!query) {
-      toast.error("Write your query, please!", {
-        duration: 4000,
-        position: "top-left",
-        style: { color: "red" },
-      });
-      return;
-    }
-    onSubmit(query);
-  };
-  return (
-    <header className={css.header}>
-      <form className={css.form} onSubmit={handleInputSubmit}>
-        <input
-          type="text"
-          className={css.input}
-          name="searchword"
-          placeholder="Search images and photos"
-        />
-        <button className={css.button} type="submit">
-          <BsSearch className={css.iconbtn} />
-        </button>
-      </form>
-    </header>
-  );
+interface SearchBarProps{
+  onSubmit: (value: string) => void
 }
+
+const SearchBar: React.FC<SearchBarProps> = ({onSubmit}) => {
+
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
+e.preventDefault()
+const form = e.currentTarget;
+const value = (form.elements.namedItem("searchQuery") as HTMLInputElement).value;
+if (value.trim()=== ""){
+  form.reset()
+  toast.error("Please enter your request!")
+  return
+}
+onSubmit(value);
+form.reset()
+
+}
+
+  return (
+    <header className={s.header}>
+      <Toaster   position="top-right"
+  reverseOrder={true}/>
+  <form className={s.form} onSubmit={handleSubmit}>
+    <input className={s.input}
+      type="text"
+      autoComplete="off"
+      placeholder="Search images and photos"
+      name="searchQuery"
+    />
+    <button className={s.searchBtn} type="submit"><IoSearchSharp size="18px" /></button>
+  </form>
+</header>
+
+  )
+}
+
+export default SearchBar

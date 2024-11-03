@@ -1,62 +1,68 @@
-import { useEffect } from "react";
-import ReactModal from "react-modal";
-import Loader from "../Loader/Loader";
-import css from "./ImageModal.module.css";
-// import "./ImageModal.css";
-export default function ImageModal({ isOpen, onClose, modalData }) {
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.code === "Escape" && isOpen) {
-        onClose();
-      }
-    };
-    document.addEventListener("keydown", handleEsc);
-    return () => {
-      document.removeEventListener("keydown", handleEsc);
-    };
-  }, [isOpen, onClose]);
-  return (
-    <ReactModal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      ariaHideApp={true}
-      shouldCloseOnEsc={true}
-      shouldCloseOnOverlayClick={true}
-      overlayClassName={css.overlay}
-      className={css.modal}
-      style={{
-        overlay: {
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.712)",
-        },
-        content: {
-          position: "absolute",
-          top: "40px",
-          left: "40px",
-          right: "40px",
-          bottom: "40px",
-          // overflow: "auto",
-          WebkitOverflowScrolling: "touch",
-          borderRadius: "4px",
-          outline: "none",
-        },
-      }}
-    >
-      <div>
-        {modalData ? (
-          <img
-            className={css.image}
-            src={modalData && modalData.urls.regular}
-            alt={modalData && modalData.urls.alt_description}
-          />
-        ) : (
-          <Loader />
-        )}
-      </div>
-    </ReactModal>
-  );
+import Modal from "react-modal"
+import s from "./ImageModal.module.css"
+import { useEffect } from "react"
+import { Image } from "../../assets/unsplash-api"
+Modal.setAppElement("#root")
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    padding: "0",
+    border: "none",
+    borderRadius: "0",
+    backgroundColor: "transparent",
+    zIndex: "4",
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    backdropFilter: "blur(10px)",
+    zIndex: "3",
+  },
 }
+
+interface ImageModalProps {
+  isOpen: boolean
+  isClose: ()=> void
+  image: Image | null
+}
+
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, isClose, image }) => {
+
+  if(!image) return null
+  //Відключення скроллу під модальним вікном
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [isOpen])
+
+  return (
+    <div>
+      <Modal
+        isOpen={isOpen}
+        style={customStyles}
+        onRequestClose={isClose}
+        contentLabel="Example Modal"
+      >
+        <img
+          className={s.fullImg}
+          src={image.urls.regular}
+          alt={image.alt_description}
+        />
+      </Modal>
+    </div>
+  )
+}
+
+export default ImageModal

@@ -1,4 +1,10 @@
-.loader {
-  display: flex;
-  justify-content: center;
+.loaderBox{
+   display: flex;
+   justify-content: center; 
+   
 }
+
+.loader {
+    margin-bottom: 40px;
+}
+

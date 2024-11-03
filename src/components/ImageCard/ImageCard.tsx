@@ -1,12 +1,28 @@
-import css from "./ImageCard.module.css";
-export default function ImageCard({ picture, onModalOpen }) {
+import { Image } from "../../assets/unsplash-api"
+import s from "./ImageCard.module.css"
+
+interface ImageCardProps {
+  galleryData: Image
+  onClick: (image: Image)=> void 
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({galleryData,
+  galleryData: {
+    urls: { small },
+    alt_description,
+  },
+  onClick,
+}) => {
   return (
-    <div onClick={() => onModalOpen(picture)}>
+    <div className={s.imageBox}>
       <img
-        className={css.image}
-        src={picture.urls.small}
-        alt={picture.alt_description}
+        className={s.image}
+        src={small}
+        alt={alt_description}
+        onClick={()=>onClick(galleryData)}
       />
     </div>
-  );
+  )
 }
+
+export default ImageCard

@@ -1,10 +1,18 @@
-import css from "./LoadMoreBtn.module.css";
-export default function LoadMoreButton({ onLoadMore }) {
-  return (
-    <div>
-      <button className={css.button} onClick={onLoadMore}>
-        Load more
-      </button>
-    </div>
-  );
+import s from './LoadMoreBtn.module.css'
+
+
+interface LoadMoreBtnProps {
+  onChangePage:()=> void
 }
+
+const LoadMoreBtn: React.FC<LoadMoreBtnProps> = ({onChangePage}) => {
+  function handleClick(){
+    onChangePage()
+  }
+
+  return (
+    <div className={s.btnBox}><button className={s.btnLoad} type="button" onClick={handleClick}>Load more...</button></div>
+  )
+}
+
+export default LoadMoreBtn

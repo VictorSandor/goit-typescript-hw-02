@@ -1,24 +1,12 @@
-import { ThreeDots } from "react-loader-spinner";
-export default function Loader() {
+import PropagateLoader from "react-spinners/PropagateLoader"
+import s from "./Loader.module.css"
+
+
+const Loader = () => {
   return (
-    <div style={styles.loaderContainer}>
-      <ThreeDots
-        height="80"
-        width="80"
-        radius="9"
-        color="#4fa94d"
-        ariaLabel="three-dots-loading"
-        wrapperStyle={{}}
-        visible={true}
-      />
-    </div>
-  );
+    <div className={s.loaderBox}> <PropagateLoader className={s.loader} color="black" size="10px" />
+  </div>)
+   
 }
-const styles = {
-  loaderContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh", 
-  },
-};
+
+export default Loader

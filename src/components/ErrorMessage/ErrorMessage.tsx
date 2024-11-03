@@ -1,7 +1,10 @@
-export default function ErrorMessage(): JSX.Element {
+
+const ErrorMessage = () => {
   return (
     <div>
-      <p>Sorry! Something went wrong😟! Please try again!</p>
+      <p>Something went wrong, please try again</p>
     </div>
-  );
+  )
 }
+
+export default ErrorMessage
