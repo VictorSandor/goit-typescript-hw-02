@@ -1,4 +1,4 @@
-import { Image } from "../../assets/unsplash-api"
+import { Image } from "./App"
 import s from "./ImageCard.module.css"
 
 interface ImageCardProps {

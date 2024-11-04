@@ -6,13 +6,15 @@ interface LoadMoreBtnProps {
 }
 
 const LoadMoreBtn: React.FC<LoadMoreBtnProps> = ({onChangePage}) => {
-  function handleClick(){
+  function onNextPage(){
     onChangePage()
   }
 
   return (
-    <div className={s.btnBox}><button className={s.btnLoad} type="button" onClick={handleClick}>Load more...</button></div>
-  )
+    <button className={s.button} onClick={onNextPage}>
+      Load more
+    </button>
+  );
 }
 
 export default LoadMoreBtn

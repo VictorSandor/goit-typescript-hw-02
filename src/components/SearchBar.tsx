@@ -1,6 +1,6 @@
 import s from "./SearchBar.module.css"
 import toast, { Toaster } from 'react-hot-toast';
-import { IoSearchSharp } from "react-icons/io5";
+// import { IoSearchSharp } from "react-icons/io5";
 
 
 interface SearchBarProps{

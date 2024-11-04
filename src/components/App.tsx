@@ -1,13 +1,43 @@
-import ImageGallery from "../ImageGallery/ImageGallery"
-import SearchBar from "../SearchBar/SearchBar"
-import Loader from "../Loader/Loader.jsx"
-import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx"
+import ImageGallery from "./ImageGallery"
+import SearchBar from "./SearchBar"
+import Loader from "./Loader.js"
+import ErrorMessage from "./ErrorMessage.js"
 import s from "./App.module.css"
-import { fetchImage, FetchImageResponse, Image } from "../../assets/unsplash-api.js"
 import { useEffect, useState } from "react"
-import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.jsx"
-import ImageModal from "../ImageModal/ImageModal.jsx"
+import LoadMoreBtn from "./LoadMoreBtn.js"
+import ImageModal from "./ImageModal.js"
+import axios from "axios";
 
+const KEY = "xpqP5Qt73Cu7T5diEjSLw0JQUOTvS7JxZKgcQrF6CNQ"
+
+export interface Image {
+  id: string
+  urls:{
+    small: string
+    regular: string
+  }
+  alt_description: string
+}
+
+export interface FetchImageResponse  {
+  results: Image[]
+  total: number
+  total_pages: number
+}
+
+export const fetchImage = async (page:number,query:string): Promise<FetchImageResponse> => {
+    const response = await axios.get<FetchImageResponse>('https://api.unsplash.com/search/photos', {
+    headers: {
+      Authorization: `Client-ID ${KEY}`
+    },
+    params: {
+      query: query, 
+      per_page: 12,
+      page: page
+    }
+  })
+  return response.data 
+}
 
 function App() {
   const [images, setImages] = useState<Image[]>([])
@@ -23,6 +53,7 @@ function App() {
     if (!query) {
       return
     }
+    
     const getData = async (): Promise<void> => {
       try {
         setError(false)

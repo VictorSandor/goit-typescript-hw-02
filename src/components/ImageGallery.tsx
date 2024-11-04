@@ -1,7 +1,7 @@
 import React from "react"
-import ImageCard from "../ImageCard/ImageCard"
+import ImageCard from "./ImageCard"
 import s from "./ImageGallery.module.css"
-import { Image } from "../../assets/unsplash-api"
+import { Image } from "./App"
 
 
 interface ImageGalleryProps {
@@ -12,7 +12,7 @@ interface ImageGalleryProps {
 const ImageGallery : React.FC<ImageGalleryProps> = ({galleryData,onImageClick}) => {
 
   return (
-    <ul className={s.galleryList}>
+    <ul className={s.gallery}>
 {galleryData.map(item=><li key={item.id}>
 <ImageCard galleryData={item} onClick={onImageClick} />
 	</li> )}

@@ -1,0 +1,22 @@
+.imageBox{
+    width: 400px;
+    height: 320px;
+    overflow: hidden;
+    border-radius: 10px;
+   
+}
+
+.image {
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: 300ms;
+    cursor: pointer;
+    border: 1px #aaa solid;
+}
+
+.imageBox:hover .image{
+    transform: rotate(1deg) scale(1.05);
+    box-shadow: 5px 5px 10px 1px #aaa;
+}

@@ -1,29 +1,9 @@
 import Modal from "react-modal"
 import s from "./ImageModal.module.css"
 import { useEffect } from "react"
-import { Image } from "../../assets/unsplash-api"
+import { Image } from "./App"
 Modal.setAppElement("#root")
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    padding: "0",
-    border: "none",
-    borderRadius: "0",
-    backgroundColor: "transparent",
-    zIndex: "4",
-  },
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    backdropFilter: "blur(10px)",
-    zIndex: "3",
-  },
-}
 
 interface ImageModalProps {
   isOpen: boolean
@@ -34,7 +14,6 @@ interface ImageModalProps {
 const ImageModal: React.FC<ImageModalProps> = ({ isOpen, isClose, image }) => {
 
   if(!image) return null
-  //Відключення скроллу під модальним вікном
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"
@@ -51,9 +30,10 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, isClose, image }) => {
     <div>
       <Modal
         isOpen={isOpen}
-        style={customStyles}
+        className={s.modal}
         onRequestClose={isClose}
-        contentLabel="Example Modal"
+        contentLabel="Selected Image"
+        overlayClassName={s.overlay}
       >
         <img
           className={s.fullImg}
