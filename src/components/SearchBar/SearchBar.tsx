@@ -34,7 +34,9 @@ form.reset()
       placeholder="Search images and photos"
       name="searchQuery"
     />
-    <button className={s.searchBtn} type="submit"><IoSearchSharp size="18px" /></button>
+    <button className={s.button} type="submit">
+          Search
+        </button>
   </form>
 </header>
 

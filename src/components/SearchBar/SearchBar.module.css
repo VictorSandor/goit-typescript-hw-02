@@ -6,28 +6,32 @@
     align-items: center;
 }
 
-.form{
-position: relative;
-}
+
 
 .input {
-    padding: 10px;
-    padding-left: 40px;
-    border: none;
-    border-radius: 20px;
+    height: 30px;
+    width: 200px;
+    padding: 5px;
     outline: none;
-    width: 300px;
-}
-.input::placeholder {
-    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
-.searchBtn{
- background: none;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-40%);
+.button {
+    height: 30px;
+    width: 60px;
+    border: none;
+    background-color: rgb(19, 136, 231);
+    color: white;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+.button:hover {
+    background-color: rgb(71, 71, 247);
 }
